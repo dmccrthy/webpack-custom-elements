@@ -1,0 +1,25 @@
+{
+  "name": "webpack-custom-elements",
+  "version": "1.0.0",
+  "description": "Create HTML custom elements dynamically with Webpack",
+  "main": "index.js",
+  "author": "Dan McCarthy",
+  "license": "MIT",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "html",
+    "webpack",
+    "plugin",
+    "webpack-custom-elements"
+  ],
+  "homepage": "https://github.com/dmccrthy/webpack-custom-elements",
+  "repository": "https://github.com/dmccrthy/webpack-custom-elements.git",
+  "bugs": {
+    "url": "https://github.com/dmccrthy/webpack-custom-elements/issues"
+  },
+  "dependencies": {
+    "webpack": "^5.97.1"
+  }
+}
