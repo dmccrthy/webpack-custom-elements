@@ -14,7 +14,7 @@ const path = require("path");
  * @param {Boolean} keepElements
  * @returns {string} The class definition for a given HTML component
  */
-function buildClass(name, component, keepElements) {
+function buildClass(name, component) {
     // keepElements determines if the custom element remains in the HTML
     return `\n\nclass ${name.replace("-", "")} extends HTMLElement {
         constructor() {
@@ -23,11 +23,20 @@ function buildClass(name, component, keepElements) {
 
         connectedCallback() {
             this.innerHTML = \`${component}\`
-            ${keepElements ? "" : "this.replaceWith(this.children[0]);"}
         }
     }
 
     customElements.define("${name}", ${name.replace("-", "")});`;
+}
+
+/**
+ * Get an array of HTML files in project.
+ * Used to overwrite custom-elemetns from project.
+ *
+ * @returns {Array}
+ */
+function getHtmlFiles() {
+    let file = [];
 }
 
 /**
@@ -42,7 +51,6 @@ async function elementLoader(content) {
     const options = this.getOptions();
     const source = options.source;
     const keepElements = options.keepElements || false;
-
     const callback = this.async();
 
     // Catch any errors and return to callback
@@ -52,12 +60,23 @@ async function elementLoader(content) {
 
         // Append each files contents as a class in the target js file
         for (let i = 0; i < files.length; i++) {
+            let name = files[i].split(".")[0];
             let component = await fs.readFile(
                 path.resolve(`${source}/${files[i]}`)
             );
-            let name = files[i].split(".")[0];
 
-            content += buildClass(name, component, keepElements);
+            // Check if keepElements flag is set
+            if (keepElements) {
+                content += buildClass(name, component);
+            } else {
+                // Read files from dir and scan for elements
+                let files = getHtmlFiles();
+
+                // Replace instance of component in each file
+                for (file in files) {
+                    console.log(file);
+                }
+            }
         }
 
         // Return altered content through callback

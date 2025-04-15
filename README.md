@@ -70,6 +70,29 @@ This package is provided under the MIT license, for more information see LICENSE
     </body>
     ```
 
+## Development
+
+To get started with development you'll first want to clone the repo like so:
+
+```shell
+git clone 
+```
+
+### Running Tests:
+
+Tests are setup in the ./test folder. You should run these, and generally experiment if you plan on making changes. To test the NPM package you'll need to link the package as shown below:
+
+```shell
+# start in the root folder
+npm link
+
+# In the test folder link the package
+cd test
+npm link webpack-custom-elements
+```
+
+From here you can start up the server like normal and start testin.
+
 ##
 
 This project is a work in-progress and is likely to change overtime. If you find any bugs, or have feature requests feel free to fill out an issue.
